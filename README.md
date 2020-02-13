@@ -1,53 +1,95 @@
 ---
 page_type: sample
 languages:
-- csharp
+- Java
 products:
-- dotnet
-description: "Add 150 character max description"
+- GitHub
+description: "Deploy Spring Petclinic application using GitHub Actions"
 urlFragment: "update-this-to-unique-url-stub"
 ---
 
-# Official Microsoft Sample
+## Understanding the Spring Petclinic application with a few diagrams
+<a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
+## Running petclinic locally
+Petclinic is a [Spring Boot](https://spring.io/guides/gs/spring-boot) application built using [Maven](https://spring.io/guides/gs/maven/). You can build a jar file and run it from the command line:
 
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
 
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
+```
+git clone https://github.com/spring-projects/spring-petclinic.git
+cd spring-petclinic
+./mvnw package
+java -jar target/*.jar
+```
 
-Give a short description for your sample here. What does it do and why is it important?
+You can then access petclinic here: http://localhost:8080/
 
-## Contents
+<img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
+Or you can run it from Maven directly using the Spring Boot Maven plugin. If you do this it will pick up changes that you make in the project immediately (changes to Java source files require a compile as well - most people use an IDE for this):
 
-| File/folder       | Description                                |
-|-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
-| `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
+```
+./mvnw spring-boot:run
+```
 
-## Prerequisites
+## In case you find a bug/suggested improvement for Spring Petclinic
+Our issue tracker is available here: https://github.com/spring-projects/spring-petclinic/issues
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
 
-## Setup
+## Database configuration
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+In its default configuration, Petclinic uses an in-memory database (HSQLDB) which
+gets populated at startup with data. A similar setup is provided for MySql in case a persistent database configuration is needed.
+Note that whenever the database type is changed, the app needs to be run with a different profile: `spring.profiles.active=mysql` for MySql.
 
-## Running the sample
+You could start MySql locally with whatever installer works for your OS, or with docker:
 
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
+```
+docker run -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
+```
 
-## Key concepts
+Further documentation is provided [here](https://github.com/spring-projects/spring-petclinic/blob/master/src/main/resources/db/mysql/petclinic_db_setup_mysql.txt).
 
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+## Working with Petclinic in your IDE
+
+### Prerequisites
+The following items should be installed in your system:
+* Java 8 or newer.
+* git command line tool (https://help.github.com/articles/set-up-git)
+* Your preferred IDE 
+  * Eclipse with the m2e plugin. Note: when m2e is available, there is an m2 icon in `Help -> About` dialog. If m2e is
+  not there, just follow the install process here: https://www.eclipse.org/m2e/
+  * [Spring Tools Suite](https://spring.io/tools) (STS)
+  * IntelliJ IDEA
+  * [VS Code](https://code.visualstudio.com)
+
+### Steps:
+
+1) On the command line
+```
+git clone https://github.com/spring-projects/spring-petclinic.git
+```
+2) Inside Eclipse or STS
+```
+File -> Import -> Maven -> Existing Maven project
+```
+
+Then either build on the command line `./mvnw generate-resources` or using the Eclipse launcher (right click on project and `Run As -> Maven install`) to generate the css. Run the application main method by right clicking on it and choosing `Run As -> Java Application`.
+
+3) Inside IntelliJ IDEA
+
+In the main menu, choose `File -> Open` and select the Petclinic [pom.xml](pom.xml). Click on the `Open` button.
+
+CSS files are generated from the Maven build. You can either build them on the command line `./mvnw generate-resources`
+or right click on the `spring-petclinic` project then `Maven -> Generates sources and Update Folders`.
+
+A run configuration named `PetClinicApplication` should have been created for you if you're using a recent Ultimate
+version. Otherwise, run the application by right clicking on the `PetClinicApplication` main class and choosing
+`Run 'PetClinicApplication'`.
+
+4) Navigate to Petclinic
+
+Visit [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Contributing
 
