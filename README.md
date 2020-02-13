@@ -27,14 +27,9 @@ With **GitHub Actions** you can build end-to-end continuous integration (CI) and
 
 Fork this repo and open the sample app code in VS Code to get started.
 
-
 ## Create an Azure App Service
 
-1. Create a web app hosted in Azure with a unique name
-
-1. Select **Linux** as your OS and **Java 8** as your runtime. 
-
-1. Browse to your new web site on the portal
+Create a web app hosted in Azure with a unique name, **Linux** as the OS and **Java 8** as the runtime. 
 
 ## Set up CI/CD workflow with GitHub Actions 
 
