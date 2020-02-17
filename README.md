@@ -48,17 +48,17 @@ env:
 
 1. In the portal, Overview page, click on "Get publish profile". A publish profile is a kind of deployment credential, useful when you don't own the Azure subscription. Open the downloaded settings file in VS Code and copy the contents of the file.
 
-   ![](../../assets/images/get-publish-profile.png)
+   ![](https://github.com/Azure/actions-workflow-samples/blob/master/assets/images/get-publish-profile.png)
 
 
 1. We will now add the publish profile as a secret associated with this repo. On the GitHub repository, click on the "Settings" tab.
 
-   ![](../../assets/images/github-settings.png)
+   ![](https://github.com/Azure/actions-workflow-samples/blob/master/assets/images/github-settings.png)
 
 
 1. Go to "Secrets". Create a new secret called "AZURE_WEBAPP_PUBLISH_PROFILE" and paste the contents from the settings file.
 
-   ![](../../assets/images/create-secret.png)
+   ![](https://github.com/Azure/actions-workflow-samples/blob/master/assets/images/create-secret.png)
 
 1. Once you're done editing the workflow by configuring the required environment variables, click on "Start commit". Committing the file will trigger the workflow.
 
