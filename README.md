@@ -29,7 +29,24 @@ Fork this repo and open the sample app code in VS Code to get started.
 
 ## Create an Azure App Service
 
-Create a web app hosted in Azure with a unique name, **Linux** as the OS and **Java 8** as the runtime. 
+Create a web app hosted in Azure with a unique name, **Linux** as the OS and **Java 8** as the runtime and Tomcat 9 enabled . 
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-web-app-java-tomcat%2Fazuredeploy.json" target="_blank">
+    <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-web-app-java-tomcat%2Fazuredeploy.json" target="_blank">
+    <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/>
+</a>
+
+This template deploys a simple Linux Web Application with Java 8 and Tomcat 9 enabled allowing you to run Java applications in Azure.  
+
+The WebPlan is settled for Consumption. For more information about [hosting Plans](https://azure.microsoft.com/pricing/details/app-service/linux) As a default, this template deploys the web app using the F1" (free tier) as the pricing tier for the hosting plan. It is ideal for development and test environments, for production environments you must consider different plans.
+
+If you are new to Web App Services, see:
+
+- [Web App](https://azure.microsoft.com/services/app-service/web)
+- [Web App Documentation](https://docs.microsoft.com/azure/app-service/)
+- [Template reference](https://docs.microsoft.com/azure/templates/microsoft.compute/allversions)
 
 ## Set up CI/CD workflow with GitHub Actions 
 
