@@ -1,9 +1,12 @@
 ---
 page_type: sample
-languages: Java
-products: GitHub
-description: "Deploy Spring Petclinic application using GitHub Actions"
-urlFragment: "https://github.com/spring-projects/spring-petclinic"
+description: "Deploy Java Spring Petclinic application using GitHub Actions"
+products:
+- GitHub Actions
+- Azure App service
+languages:
+- Java
+urlFragment: https://github.com/spring-projects/spring-petclinic
 ---
 
 # Deploying a Java Web App using GitHub actions
