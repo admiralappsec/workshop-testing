@@ -7,19 +7,19 @@ on:
 
 # CONFIGURATION
 # For help, go to https://github.com/Azure/Actions
-#
+
 # 1. Set up the following secrets in your repository:
 #   AZURE_CREDS_FILE
 #   CONTRAST_CREDS_FILE
 #   DEV_TOKEN
-#
+
 # 2. Change these variables for your configuration:
 env:
-  AZURE_PACKAGE_PATH: ${{ github.workspace }} # set this to the path to your maven project
-  JAVA_VERSION: '1.8'                         # set this to the java version to use
+  JAVA_VERSION: '1.8' # set this to the java version to use
   APPLICATION_NAME: 'springone-petclinic-mark-testing'
   SPRING_CLOUD_SERV_NAME: 'mark-spring-cloud-test'
   DEV_BRANCH: 'new-app-w-github-action'
+  ARTIFACT_LOCATION: '/target/*.jar'
 
 jobs:
   build-and-deploy:
@@ -40,7 +40,7 @@ jobs:
       with:
         application-name: ${{ env.APPLICATION_NAME }}
         spring-cloud-service-name: ${{ env.SPRING_CLOUD_SERV_NAME }}
-        application-artifact-location: '/target/*.jar'
+        application-artifact-location: ${{ env.ARTIFACT_LOCATION }}
         contrast-security-credentials-file: ${{ secrets.CONTRAST_CREDS_FILE }}
         azure-credentials-file: ${{ secrets.AZURE_CREDS_FILE }}
         github-developer-token: ${{ secrets.DEV_TOKEN }}
