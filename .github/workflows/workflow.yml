@@ -1,39 +1,50 @@
-name: Deploy Java app to Azure Web App
+name: Build and Deploy Java app to Azure Spring Cloud
 
 on:
-  [push]
+  push:
+    branches:
+      - new-app-w-github-action
 
 # CONFIGURATION
 # For help, go to https://github.com/Azure/Actions
 #
 # 1. Set up the following secrets in your repository:
-#   AZURE_WEBAPP_PUBLISH_PROFILE
+#   AZURE_CREDS_FILE
+#   CONTRAST_CREDS_FILE
+#   DEV_TOKEN
 #
 # 2. Change these variables for your configuration:
 env:
-  AZURE_WEBAPP_NAME: JavaSpringPetclinic  # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }} # set this to the path to your web app project
-  JAVA_VERSION: '1.8'                # set this to the node version to use
-  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}     # set GH repo secret with the publish profile of the web app
+  AZURE_PACKAGE_PATH: ${{ github.workspace }} # set this to the path to your maven project
+  JAVA_VERSION: '1.8'                         # set this to the java version to use
+  APPLICATION_NAME: 'springone-petclinic-mark-testing'
+  SPRING_CLOUD_SERV_NAME: 'mark-spring-cloud-test'
+  DEV_BRANCH: 'new-app-w-github-action'
 
 jobs:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: Checkout
+      uses: actions/checkout@v2 #master
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: ${{ env.JAVA_VERSION }}
     - name: Build with Maven
-      run: mvn package --file pom.xml
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.jar'
-        
+      run: mvn clean package -DskipTests -Denv=cloud
+    - name: Contrast Security Azure Spring Cloud Deployment
+      uses: admiralappsec/springone-github-action@v1.2
+      id: contrast-deployment
+      with:
+        application-name: ${{ env.APPLICATION_NAME }}
+        spring-cloud-service-name: ${{ env.SPRING_CLOUD_SERV_NAME }}
+        application-artifact-location: '${{ env.AZURE_PACKAGE_PATH }}/target/*.jar'
+        contrast-security-credentials-file: ${{ secrets.CONTRAST_CREDS_FILE }}
+        azure-credentials-file: ${{ secrets.AZURE_CREDS_FILE }}
+        github-developer-token: ${{ secrets.DEV_TOKEN }}
+        github-developer-branch: ${{ env.DEV_BRANCH }}
+ 
   # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
   # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
