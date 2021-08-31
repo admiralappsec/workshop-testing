@@ -35,7 +35,7 @@ jobs:
     - name: Build with Maven
       run: mvn clean package -DskipTests -Denv=cloud
     - name: Contrast Security Azure Spring Cloud Deployment
-      uses: admiralappsec/springone-github-action@v1.2
+      uses: admiralappsec/springone-github-action@main
       id: contrast-deployment
       with:
         application-name: ${{ env.APPLICATION_NAME }}
