@@ -40,7 +40,7 @@ jobs:
       with:
         application-name: ${{ env.APPLICATION_NAME }}
         spring-cloud-service-name: ${{ env.SPRING_CLOUD_SERV_NAME }}
-        application-artifact-location: '${{ env.AZURE_PACKAGE_PATH }}/target/*.jar'
+        application-artifact-location: '/target/*.jar'
         contrast-security-credentials-file: ${{ secrets.CONTRAST_CREDS_FILE }}
         azure-credentials-file: ${{ secrets.AZURE_CREDS_FILE }}
         github-developer-token: ${{ secrets.DEV_TOKEN }}
