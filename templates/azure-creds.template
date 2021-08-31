@@ -1,0 +1,8 @@
+{
+    "azure_application_id": "",
+    "azure_tenant_id": "",
+    "azure_client_secret": "",
+    "azure_subscription_id": "",
+    "azure_resource_group_name": "",
+    "azure_region": ""
+}
