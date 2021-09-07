@@ -17,7 +17,6 @@ env:
   JAVA_VERSION: '1.8' # set this to the java version to use
   APPLICATION_NAME: 'springone-petclinic-mark-testing'
   SPRING_CLOUD_SERV_NAME: 'mark-spring-cloud-test'
-  DEV_BRANCH: 'new-app-w-github-action'
 
 jobs:
   build-and-deploy:
@@ -31,7 +30,7 @@ jobs:
       with:
         java-version: ${{ env.JAVA_VERSION }}
     - name: Build with Maven
-      run: mvn clean package -DskipTests -Denv=cloud
+      run: mvn -T 1C clean package -DskipTests -Denv=cloud
     - name: Contrast Security Azure Spring Cloud Deployment
       uses: admiralappsec/springone-github-action@main
       id: contrast-deployment
@@ -40,7 +39,6 @@ jobs:
         spring-cloud-service-name: ${{ env.SPRING_CLOUD_SERV_NAME }}
         contrast-security-credentials-file: ${{ secrets.CONTRAST_CREDS_FILE }}
         azure-credentials-file: ${{ secrets.AZURE_CREDS_FILE }}
-        github-developer-branch: ${{ env.DEV_BRANCH }}
  
   # For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
   # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
